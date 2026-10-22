@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="طريقة البحث عن الموقع حسب كمية الماء والأكل في جسم الإنسان - الكلية التقنية بجازان">
+    <meta name="keywords" content="طريقة البحث عن الموقع حسب كمية الماء والأكل في جسم الإنسان الكلية التقنية في جازان, الكلية التقنية بجازان, حاسبة الماء والتغذية">
+    <title>طريقة البحث عن الموقع حسب كمية الماء والأكل في جسم الإنسان - الكلية التقنية بجازان</title>
+    <style>
+        :root {
+            --primary: #006837;
+            --primary-dark: #004d28;
+            --gold: #c59b27;
+            --water-blue: #00a8ff;
+            --food-green: #2ed573;
+            --bg: #f4f7f6;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 0;
+            color: var(--text);
+            direction: rtl;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+            border-bottom: 5px solid var(--gold);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        header h1 { margin: 0; font-size: 22px; }
+        header p { margin: 5px 0 0; opacity: 0.9; font-size: 14px; }
+
+        .search-tagline {
+            background-color: rgba(197, 155, 39, 0.2);
+            color: #fff;
+            padding: 6px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 13px;
+            border: 1px solid var(--gold);
+        }
+
+        .main-container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        /* جهة اليمين: الحاسبة */
+        .calculator-card {
+            flex: 1;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-top: 5px solid var(--primary);
+        }
+
+        .calculator-card h2 {
+            margin-top: 0;
+            color: var(--primary-dark);
+            font-size: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+            text-align: right;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .btn-calc {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-calc:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .results {
+            margin-top: 20px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-right: 4px solid var(--gold);
+            display: none;
+        }
+
+        .results p {
+            margin: 8px 0;
+            font-weight: bold;
+        }
+
+        /* جهة اليسار: مجسم الإنسان التفاعلي */
+        .body-visual-container {
+            width: 320px;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .body-visual-container h3 {
+            margin-top: 0;
+            color: var(--primary-dark);
+            font-size: 16px;
+        }
+
+        .human-wrapper {
+            position: relative;
+            width: 180px;
+            height: 360px;
+            margin: 15px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .human-svg {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+            transform-origin: center;
+        }
+
+        .icons-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 45px 0 25px 0;
+            box-sizing: border-box;
+        }
+
+        .water-label {
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: bold;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+        }
+
+        .food-label {
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: bold;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+        }
+
+        /* أسفل الصفحة: فريق العمل بالمؤسسة */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 25px 20px;
+            margin-top: 40px;
+            border-top: 4px solid var(--gold);
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-title {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            border-right: 4px solid var(--gold);
+            text-align: right;
+        }
+
+        .team-card.main-developer {
+            background: rgba(197, 155, 39, 0.25);
+            border-right: 5px solid #fff;
+        }
+
+        .team-card .role { font-size: 11px; color: var(--gold); font-weight: bold; margin-bottom: 3px; }
+        .team-card .name { font-weight: bold; font-size: 15px; color: #fff; }
+        .team-card .id { font-size: 12px; color: #ddd; margin-top: 4px; }
+        .team-card .college { font-size: 11px; color: #f1c40f; margin-top: 3px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>المملكة العربية السعودية</h1>
+    <p>المؤسسة العامة للتدريب التقني والمهني - الكلية التقنية بجازان</p>
+    <div class="search-tagline">🔍 طريقة البحث عن الموقع حسب كمية الماء والأكل في جسم الإنسان الكلية التقنية في جازان</div>
+</header>
+
+<div class="main-container">
+
+    <!-- حاسبة الاحتياج -->
+    <div class="calculator-card">
+        <h2>💧 حاسبة احتياج الجسم للماء والتغذية</h2>
+
+        <div class="form-group">
+            <label>أدخل الوزن (كجم):</label>
+            <input type="number" id="weight" placeholder="مثال: 70" value="70">
+        </div>
+
+        <div class="form-group">
+            <label>أدخل الطول (سم):</label>
+            <input type="number" id="height" placeholder="مثال: 170" value="170">
+        </div>
+
+        <button class="btn-calc" onclick="calculateNeeds()">احسب الاحتياج التفاعلي 🚀</button>
+
+        <div class="results" id="results-box">
+            <p id="res-water">💧 احتياجك من الماء: -</p>
+            <p id="res-bottles">🍾 عدد عبوات (500 مل): -</p>
+            <p id="res-calories">🔥 السعرات التقديرية: -</p>
+            <p id="res-protein">🥩 البروتين اليومي: -</p>
+        </div>
+    </div>
+
+    <!-- جهة اليسار: مجسم إنسان تفاعلي مع الحجم والوزن -->
+    <div class="body-visual-container">
+        <h3>توزيع احتياج الجسم البصري</h3>
+
+        <div class="human-wrapper">
+            <svg id="humanSvg" class="human-svg" viewBox="0 0 100 220" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                    <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop id="waterStop1" offset="0%" stop-color="#00a8ff" />
+                        <stop id="waterStop2" offset="60%" stop-color="#70a1ff" />
+                        <stop id="foodStop1" offset="60%" stop-color="#2ed573" />
+                        <stop id="foodStop2" offset="100%" stop-color="#26af5f" />
+                    </linearGradient>
+                </defs>
+
+                <path fill="url(#bodyGradient)" stroke="#004d28" stroke-width="2" d="
+                        M 50 10
+                        A 12 12 0 1 0 50 34
+                        A 12 12 0 1 0 50 10 Z
+                        M 42 38
+                        L 30 42
+                        L 18 70
+                        L 26 74
+                        L 36 54
+                        L 36 110
+                        L 26 200
+                        L 38 200
+                        L 48 125
+                        L 52 125
+                        L 62 200
+                        L 74 200
+                        L 64 110
+                        L 64 54
+                        L 74 74
+                        L 82 70
+                        L 70 42
+                        L 58 38 Z
+                    " />
+            </svg>
+
+            <div class="icons-overlay">
+                <div class="water-label">
+                    💧 الماء والسوائل<br>🧊 🥤
+                </div>
+                <div class="food-label">
+                    🍎 الأغذية والأكلات<br>🥦 🍌 🥕
+                </div>
+            </div>
+        </div>
+
+        <p id="body-status-text" style="font-size: 12px; color: #666; margin-top: 5px;">يتغير حجم وهيئة المجسم تفاعلياً مع كمية الوزن والماء والأكل</p>
+    </div>
+
+</div>
+
+<!-- تذييل الصفحة مع أداء فريق المطورين وتكرار الكلية التقنية بجازان -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-title">إعداد وتطوير متدربي الكلية التقنية بجازان</div>
+
+        <div class="team-grid">
+            <!-- اسمك في البداية كمطور رئيسي -->
+            <div class="team-card main-developer">
+                <div class="role">👑 المطور الرئيسي</div>
+                <div class="name">👨‍🎓 شادي محمد سلمان يتيمي</div>
+                <div class="id">الرقم التدريبي: 444303786</div>
+                <div class="college">الكلية التقنية بجازان</div>
+            </div>
+            <div class="team-card">
+                <div class="role">👨‍🎓 متدرب مشارك</div>
+                <div class="name">حسام حكمي</div>
+                <div class="id">الرقم التدريبي: 446145256</div>
+                <div class="college">الكلية التقنية بجازان</div>
+            </div>
+            <div class="team-card">
+                <div class="role">👨‍🎓 متدرب مشارك</div>
+                <div class="name">حكيم هاشم</div>
+                <div class="id">الرقم التدريبي: 445260898</div>
+                <div class="college">الكلية التقنية بجازان</div>
+            </div>
+            <div class="team-card">
+                <div class="role">👨‍🎓 متدرب مشارك</div>
+                <div class="name">علي عبده عسيس</div>
+                <div class="id">متدرب الكلية</div>
+                <div class="college">الكلية التقنية بجازان</div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function calculateNeeds() {
+        let weight = parseFloat(document.getElementById('weight').value);
+        let height = parseFloat(document.getElementById('height').value);
+
+        if (!weight || !height || weight <= 0 || height <= 0) {
+            alert("يرجى إدخال قيم صحيحة للوزن والطول!");
+            return;
+        }
+
+        // 1. حساب احتياج الماء
+        let waterMl = weight * 35;
+        let waterLiters = (waterMl / 1000).toFixed(2);
+        let bottles = (waterMl / 500).toFixed(1);
+
+        // 2. حساب التغذية والسعرات
+        let calories = Math.round(weight * 24 * 1.2);
+        let protein = Math.round(weight * 1.6);
+
+        // عرض البيانات المكتوبة
+        document.getElementById('res-water').innerText = `💧 احتياجك من الماء: ${waterLiters} لتر يومياً`;
+        document.getElementById('res-bottles').innerText = `🍾 عدد عبوات 500 مل: حوالي ${bottles} عبوة`;
+        document.getElementById('res-calories').innerText = `🔥 السعرات اليومية التقديرية: ${calories} سعرة`;
+        document.getElementById('res-protein').innerText = `🥩 البروتين اليومي الموصى به: ${protein} جرام`;
+
+        document.getElementById('results-box').style.display = 'block';
+
+        // 3. نسبة التعبئة للماء والتغذية
+        let waterPercentage = Math.min(Math.max((waterLiters / 4.5) * 100, 35), 75);
+        document.getElementById('waterStop2').setAttribute('offset', waterPercentage + '%');
+        document.getElementById('foodStop1').setAttribute('offset', waterPercentage + '%');
+
+        // 4. تمدد وانكماش المجسم حسب الوزن
+        let scaleX = 0.75 + ((weight / 150) * 0.65);
+        scaleX = Math.min(Math.max(scaleX, 0.70), 1.35);
+
+        let svgElement = document.getElementById('humanSvg');
+        svgElement.style.transform = `scaleX(${scaleX})`;
+
+        // تحديث حالة المجسم
+        let statusText = "";
+        if (weight < 55) {
+            statusText = "المجسم بوضع نحيف رشيق 🏃‍♂️";
+        } else if (weight <= 85) {
+            statusText = "المجسم بوضع متناسق ومتوازن ⚖️";
+        } else {
+            statusText = "المجسم ممتلئ مع زيادة الوزن والاحتياج ⚡";
+        }
+        document.getElementById('body-status-text').innerText = statusText;
+    }
+
+    // تشغيل أوتوماتيكي
+    calculateNeeds();
+</script>
+
+</body>
+</html>
