@@ -3,113 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="طريقة البحث عن الموقع حسب كمية الماء والأكل في جسم الإنسان - الكلية التقنية بجازان">
-    <meta name="keywords" content="طريقة البحث عن الموقع حسب كمية الماء والأكل في جسم الإنسان الكلية التقنية في جازان, الكلية التقنية بجازان, حاسبة الماء والتغذية">
-    <title>طريقة البحث عن الموقع حسب كمية الماء والأكل في جسم الإنسان - الكلية التقنية بجازان</title>
+    <title>محاكي وجسم الإنسان التفاعلي | الكلية التقنية بجازان</title>
     <style>
         :root {
-            --primary: #006837;
-            --primary-dark: #004d28;
-            --gold: #c59b27;
-            --water-blue: #00a8ff;
-            --food-green: #2ed573;
-            --bg: #f4f7f6;
-            --card-bg: #ffffff;
-            --text: #2c3e50;
+            --primary-green: #046a38;
+            --secondary-green: #0d8a4e;
+            --accent-gold: #d4af37;
+            --bg-gray: #f4f6f8;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
+            background-color: var(--bg-gray);
             margin: 0;
             padding: 0;
-            color: var(--text);
             direction: rtl;
+            color: #333;
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            background-color: var(--primary-green);
             color: white;
-            padding: 20px 30px;
             text-align: center;
-            border-bottom: 5px solid var(--gold);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 15px 10px;
+            border-bottom: 4px solid var(--accent-gold);
         }
 
-        header h1 { margin: 0; font-size: 22px; }
-        header p { margin: 5px 0 0; opacity: 0.9; font-size: 14px; }
+        header h2 { margin: 0; font-size: 18px; font-weight: normal; }
+        header h3 { margin: 5px 0 10px 0; font-size: 14px; font-weight: normal; opacity: 0.9; }
 
-        .search-tagline {
-            background-color: rgba(197, 155, 39, 0.2);
-            color: #fff;
-            padding: 6px 15px;
-            border-radius: 20px;
+        .search-banner {
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 25px;
+            padding: 8px 15px;
             display: inline-block;
-            margin-top: 10px;
             font-size: 13px;
-            border: 1px solid var(--gold);
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .main-container {
-            max-width: 1100px;
-            margin: 30px auto;
-            padding: 0 20px;
             display: flex;
-            gap: 30px;
-            align-items: flex-start;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1050px;
+            margin: 20px auto;
+            padding: 0 10px;
         }
 
-        /* جهة اليمين: الحاسبة */
-        .calculator-card {
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             flex: 1;
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-            border-top: 5px solid var(--primary);
+            min-width: 300px;
         }
 
-        .calculator-card h2 {
-            margin-top: 0;
-            color: var(--primary-dark);
+        .calculator-title {
+            color: var(--primary-green);
             font-size: 20px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-            text-align: right;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
             font-weight: bold;
-            color: var(--text);
+            margin-top: 0;
         }
 
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; color: #444; }
         .form-group input {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
+            padding: 10px;
+            border: 1px solid #ccc;
             border-radius: 8px;
             box-sizing: border-box;
-            font-size: 15px;
-            transition: 0.3s;
-        }
-
-        .form-group input:focus {
-            border-color: var(--primary);
-            outline: none;
+            font-size: 16px;
+            text-align: center;
         }
 
         .btn-calc {
-            width: 100%;
-            background-color: var(--primary);
+            background-color: var(--primary-green);
             color: white;
-            padding: 12px;
             border: none;
+            padding: 12px;
+            width: 100%;
             border-radius: 8px;
             font-size: 16px;
             font-weight: bold;
@@ -117,311 +93,262 @@
             transition: 0.3s;
         }
 
-        .btn-calc:hover {
-            background-color: var(--primary-dark);
-        }
+        .btn-calc:hover { background-color: var(--secondary-green); }
 
-        .results {
-            margin-top: 20px;
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            border-right: 4px solid var(--gold);
-            display: none;
-        }
-
-        .results p {
-            margin: 8px 0;
-            font-weight: bold;
-        }
-
-        /* جهة اليسار: مجسم الإنسان التفاعلي */
-        .body-visual-container {
-            width: 320px;
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        .result-box {
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-top: 12px;
             text-align: center;
+            font-size: 14px;
         }
 
-        .body-visual-container h3 {
-            margin-top: 0;
-            color: var(--primary-dark);
-            font-size: 16px;
+        .box-water-current { background-color: #f0f9ff; border: 2px solid #0284c7; color: #0369a1; }
+        .box-water-daily { background-color: #fefce8; border: 2px solid #ca8a04; color: #854d0e; }
+        .box-food { background-color: #f0fdf4; border: 2px solid #22c55e; color: #166534; }
+
+        .result-box .val {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 4px 0;
         }
 
-        .human-wrapper {
+        .body-visual-wrapper {
             position: relative;
-            width: 180px;
-            height: 360px;
-            margin: 15px auto;
+            width: 220px;
+            height: 330px;
+            margin: 0 auto;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        .human-svg {
-            width: 100%;
-            height: 100%;
-            transition: transform 0.5s ease-in-out;
-            transform-origin: center;
+        #front-human-svg {
+            transition: transform 0.6s ease-in-out;
         }
 
-        .icons-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 45px 0 25px 0;
-            box-sizing: border-box;
-        }
-
-        .water-label {
-            color: #ffffff;
-            font-size: 13px;
-            font-weight: bold;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.7);
-        }
-
-        .food-label {
-            color: #ffffff;
-            font-size: 13px;
-            font-weight: bold;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.7);
-        }
-
-        /* أسفل الصفحة: فريق العمل بالمؤسسة */
-        footer {
-            background-color: var(--primary-dark);
-            color: white;
-            padding: 25px 20px;
-            margin-top: 40px;
-            border-top: 4px solid var(--gold);
-        }
-
-        .footer-content {
-            max-width: 1100px;
-            margin: 0 auto;
+        .status-card {
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 15px;
             text-align: center;
-        }
-
-        .footer-title {
-            font-size: 16px;
-            margin-bottom: 15px;
-            color: var(--gold);
+            font-size: 13px;
+            line-height: 1.5;
             font-weight: bold;
         }
+        .status-underweight { background-color: #fef9c3; border: 1px solid #eab308; color: #713f12; }
+        .status-normal { background-color: #dcfce7; border: 1px solid #22c55e; color: #14532d; }
+        .status-obese { background-color: #fee2e2; border: 1px solid #ef4444; color: #7f1d1d; }
 
+        /* بطاقة المدرب ومتدربينه موحدة وبشكل متناسق */
+        .team-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            max-width: 1010px;
+            margin: 0 auto 20px auto;
+            border-right: 5px solid var(--accent-gold);
+        }
+        .team-title {
+            color: var(--primary-green);
+            font-size: 18px;
+            margin-top: 0;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+        }
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
+            gap: 12px;
+            margin-top: 12px;
+            font-size: 14px;
         }
-
-        .team-card {
-            background: rgba(255, 255, 255, 0.1);
+        .team-member {
+            background: #f8fafc;
             padding: 12px;
-            border-radius: 8px;
-            border-right: 4px solid var(--gold);
-            text-align: right;
+            border-radius: 10px;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            text-align: center;
         }
 
-        .team-card.main-developer {
-            background: rgba(197, 155, 39, 0.25);
-            border-right: 5px solid #fff;
-        }
-
-        .team-card .role { font-size: 11px; color: var(--gold); font-weight: bold; margin-bottom: 3px; }
-        .team-card .name { font-weight: bold; font-size: 15px; color: #fff; }
-        .team-card .id { font-size: 12px; color: #ddd; margin-top: 4px; }
-        .team-card .college { font-size: 11px; color: #f1c40f; margin-top: 3px; }
+        footer { text-align: center; padding: 15px; color: #777; font-size: 13px; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>المملكة العربية السعودية</h1>
-    <p>المؤسسة العامة للتدريب التقني والمهني - الكلية التقنية بجازان</p>
-    <div class="search-tagline">🔍 طريقة البحث عن الموقع حسب كمية الماء والأكل في جسم الإنسان الكلية التقنية في جازان</div>
+    <h2>المملكة العربية السعودية</h2>
+    <h3>المؤسسة العامة للتدريب التقني والمهني - الكلية التقنية بجازان</h3>
+    <div class="search-banner">
+        🔍 طريقة البحث عن الموقع حسب كمية الماء والأكل في جسم الإنسان الكلية التقنية في جازان
+    </div>
 </header>
 
 <div class="main-container">
 
-    <!-- حاسبة الاحتياج -->
-    <div class="calculator-card">
-        <h2>💧 حاسبة احتياج الجسم للماء والتغذية</h2>
+    <!-- 1. الحاسبة والكروت على اليمين -->
+    <div class="card">
+        <h3 class="calculator-title">💧 حاسبة احتياج الجسم للماء والتغذية</h3>
 
-        <div class="form-group">
-            <label>أدخل الوزن (كجم):</label>
-            <input type="number" id="weight" placeholder="مثال: 70" value="70">
+        <form id="calc-form">
+            <div class="form-group">
+                <label>أدخل الوزن (كجم):</label>
+                <input type="number" id="weight" value="98" placeholder="مثال: 98" required>
+            </div>
+
+            <div class="form-group">
+                <label>أدخل الطول (سم):</label>
+                <input type="number" id="height" value="170" placeholder="مثال: 170" required>
+            </div>
+
+            <button type="button" class="btn-calc" onclick="updateBodyModel()">
+                احسب الاحتياج التفاعلي 🚀
+            </button>
+        </form>
+
+        <div class="result-box box-water-current">
+            <div>💧 كمية الماء الحالية في جسمك (%60):</div>
+            <div class="val" id="current-water">58.8</div>
+            <small>لتر ماء داخل أنسجة جسمك</small>
         </div>
 
-        <div class="form-group">
-            <label>أدخل الطول (سم):</label>
-            <input type="number" id="height" placeholder="مثال: 170" value="170">
+        <div class="result-box box-water-daily">
+            <div>💧 الاحتياج اليومي المطلوب من الماء:</div>
+            <div class="val" id="daily-water">3.43</div>
+            <small id="cups-text">لتر يومياً (ما يعادل 14 أكواب ماء)</small>
         </div>
 
-        <button class="btn-calc" onclick="calculateNeeds()">احسب الاحتياج التفاعلي 🚀</button>
-
-        <div class="results" id="results-box">
-            <p id="res-water">💧 احتياجك من الماء: -</p>
-            <p id="res-bottles">🍾 عدد عبوات (500 مل): -</p>
-            <p id="res-calories">🔥 السعرات التقديرية: -</p>
-            <p id="res-protein">🥩 البروتين اليومي: -</p>
+        <div class="result-box box-food">
+            <div>🍎 احتياج الأغذية والسعرات الحرارية:</div>
+            <div class="val" id="daily-calories">3228</div>
+            <small>سعرة حرارية / يومياً</small>
         </div>
     </div>
 
-    <!-- جهة اليسار: مجسم إنسان تفاعلي مع الحجم والوزن -->
-    <div class="body-visual-container">
-        <h3>توزيع احتياج الجسم البصري</h3>
+    <!-- 2. مجسم الجسم التفاعلي على اليسار -->
+    <div class="card">
+        <h3 style="text-align: center; color: var(--primary-green); margin-top: 0;">مجسم الجسم التفاعلي</h3>
 
-        <div class="human-wrapper">
-            <svg id="humanSvg" class="human-svg" viewBox="0 0 100 220" preserveAspectRatio="xMidYMid meet">
+        <div class="body-visual-wrapper">
+            <svg id="front-human-svg" width="180" height="310" viewBox="0 0 200 400">
                 <defs>
-                    <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop id="waterStop1" offset="0%" stop-color="#00a8ff" />
-                        <stop id="waterStop2" offset="60%" stop-color="#70a1ff" />
-                        <stop id="foodStop1" offset="60%" stop-color="#2ed573" />
-                        <stop id="foodStop2" offset="100%" stop-color="#26af5f" />
-                    </linearGradient>
+                    <mask id="front-stick-mask">
+                        <circle cx="100" cy="50" r="30" fill="white" />
+                        <path d="M 60 90 L 140 90 L 130 220 L 70 220 Z" fill="white" />
+                        <path d="M 58 92 L 20 150 L 35 160 L 68 110 Z" fill="white" />
+                        <path d="M 142 92 L 180 150 L 165 160 L 132 110 Z" fill="white" />
+                        <path d="M 72 220 L 50 370 L 75 370 L 95 220 Z" fill="white" />
+                        <path d="M 128 220 L 150 370 L 125 370 L 105 220 Z" fill="white" />
+                    </mask>
                 </defs>
 
-                <path fill="url(#bodyGradient)" stroke="#004d28" stroke-width="2" d="
-                        M 50 10
-                        A 12 12 0 1 0 50 34
-                        A 12 12 0 1 0 50 10 Z
-                        M 42 38
-                        L 30 42
-                        L 18 70
-                        L 26 74
-                        L 36 54
-                        L 36 110
-                        L 26 200
-                        L 38 200
-                        L 48 125
-                        L 52 125
-                        L 62 200
-                        L 74 200
-                        L 64 110
-                        L 64 54
-                        L 74 74
-                        L 82 70
-                        L 70 42
-                        L 58 38 Z
-                    " />
-            </svg>
+                <g mask="url(#front-stick-mask)">
+                    <rect id="bg-liquid" x="0" y="0" width="200" height="220" fill="#0284c7" />
+                    <rect id="food-liquid" x="0" y="220" width="200" height="180" fill="#22c55e" />
+                </g>
 
-            <div class="icons-overlay">
-                <div class="water-label">
-                    💧 الماء والسوائل<br>🧊 🥤
-                </div>
-                <div class="food-label">
-                    🍎 الأغذية والأكلات<br>🥦 🍌 🥕
-                </div>
-            </div>
+                <use href="#front-stick-mask" fill="none" id="body-outline" stroke="#0284c7" stroke-width="3" />
+
+                <text x="100" y="115" text-anchor="middle" fill="white" font-size="12" font-weight="bold">الماء والسوائل 💧</text>
+                <text x="100" y="300" text-anchor="middle" fill="white" font-size="12" font-weight="bold">الأغذية والأكلات 🍎</text>
+
+                <!-- علامة الصح في حال الوزن المناسب والمثالي -->
+                <g id="check-icon" style="display: none;">
+                    <circle cx="100" cy="140" r="28" fill="#22c55e" opacity="0.95" />
+                    <path d="M 86 140 L 95 150 L 116 128" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+                </g>
+            </svg>
         </div>
 
-        <p id="body-status-text" style="font-size: 12px; color: #666; margin-top: 5px;">يتغير حجم وهيئة المجسم تفاعلياً مع كمية الوزن والماء والأكل</p>
+        <div id="status-card" class="status-card status-normal">
+            ⚖️ المجسم بوضع متناسق ومتوازن
+        </div>
     </div>
 
 </div>
 
-<!-- تذييل الصفحة مع أداء فريق المطورين وتكرار الكلية التقنية بجازان -->
-<footer>
-    <div class="footer-content">
-        <div class="footer-title">إعداد وتطوير متدربي الكلية التقنية بجازان</div>
-
-        <div class="team-grid">
-            <!-- اسمك في البداية كمطور رئيسي -->
-            <div class="team-card main-developer">
-                <div class="role">👑 المطور الرئيسي</div>
-                <div class="name">👨‍🎓 شادي محمد سلمان يتيمي</div>
-                <div class="id">الرقم التدريبي: 444303786</div>
-                <div class="college">الكلية التقنية بجازان</div>
-            </div>
-            <div class="team-card">
-                <div class="role">👨‍🎓 متدرب مشارك</div>
-                <div class="name">حسام حكمي</div>
-                <div class="id">الرقم التدريبي: 446145256</div>
-                <div class="college">الكلية التقنية بجازان</div>
-            </div>
-            <div class="team-card">
-                <div class="role">👨‍🎓 متدرب مشارك</div>
-                <div class="name">حكيم هاشم</div>
-                <div class="id">الرقم التدريبي: 445260898</div>
-                <div class="college">الكلية التقنية بجازان</div>
-            </div>
-            <div class="team-card">
-                <div class="role">👨‍🎓 متدرب مشارك</div>
-                <div class="name">علي عبده عسيس</div>
-                <div class="id">متدرب الكلية</div>
-                <div class="college">الكلية التقنية بجازان</div>
-            </div>
+<!-- بطاقة إشراف المهندس ومتدربينه مع توحيد التنسيق للجميع -->
+<div class="team-card">
+    <h3 class="team-title">👨‍🏫 إشراف المدرب ومتدربينه:</h3>
+    <div style="font-weight: bold; color: var(--primary-green); margin-bottom: 12px; font-size: 16px;">
+        المهندس / أكرم عقيلي
+    </div>
+    <div class="team-grid">
+        <div class="team-member">
+            <strong style="color: #046a38;">شادي محمد سلمان يتيمي (أبو عزام)</strong><br>
+            <small style="color: #555;">الرقم التدريبي: 444303786</small>
+        </div>
+        <div class="team-member">
+            <strong style="color: #046a38;">حسام حكمي</strong><br>
+            <small style="color: #555;">الرقم التدريبي: 446145256</small>
+        </div>
+        <div class="team-member">
+            <strong style="color: #046a38;">علي عبده عسيس</strong><br>
+            <small style="color: #555;">الرقم التدريبي: 445252773</small>
+        </div>
+        <div class="team-member">
+            <strong style="color: #046a38;">حكيم هاشم</strong><br>
+            <small style="color: #555;">الرقم التدريبي: 445260898</small>
+        </div>
+        <div class="team-member">
+            <strong style="color: #046a38;">إياد حسن راجحي</strong><br>
+            <small style="color: #555;">الرقم التدريبي: 445241834</small>
         </div>
     </div>
+</div>
+
+<footer>
+    جميع الحقوق محفوظة © 2026 - الكلية التقنية بجازان | إشراف: م. أكرم عقيلي ومتدربينه
 </footer>
 
 <script>
-    function calculateNeeds() {
-        let weight = parseFloat(document.getElementById('weight').value);
-        let height = parseFloat(document.getElementById('height').value);
+    function updateBodyModel() {
+        const weight = parseFloat(document.getElementById('weight').value);
+        const height = parseFloat(document.getElementById('height').value);
 
-        if (!weight || !height || weight <= 0 || height <= 0) {
-            alert("يرجى إدخال قيم صحيحة للوزن والطول!");
+        if (!weight || !height) {
+            alert('يرجى كتابة الوزن والطول.');
             return;
         }
 
-        // 1. حساب احتياج الماء
-        let waterMl = weight * 35;
-        let waterLiters = (waterMl / 1000).toFixed(2);
-        let bottles = (waterMl / 500).toFixed(1);
+        const heightM = height / 100;
+        const bmi = weight / (heightM * heightM);
 
-        // 2. حساب التغذية والسعرات
-        let calories = Math.round(weight * 24 * 1.2);
-        let protein = Math.round(weight * 1.6);
+        const currentWater = (weight * 0.60).toFixed(1);
+        const dailyWater = (weight * 0.035).toFixed(2);
+        const cups = Math.round(dailyWater * 4);
+        const calories = Math.round(weight * 30 + height * 2);
 
-        // عرض البيانات المكتوبة
-        document.getElementById('res-water').innerText = `💧 احتياجك من الماء: ${waterLiters} لتر يومياً`;
-        document.getElementById('res-bottles').innerText = `🍾 عدد عبوات 500 مل: حوالي ${bottles} عبوة`;
-        document.getElementById('res-calories').innerText = `🔥 السعرات اليومية التقديرية: ${calories} سعرة`;
-        document.getElementById('res-protein').innerText = `🥩 البروتين اليومي الموصى به: ${protein} جرام`;
+        document.getElementById('current-water').innerText = currentWater;
+        document.getElementById('daily-water').innerText = dailyWater;
+        document.getElementById('cups-text').innerText = `لتر يومياً (ما يعادل ${cups} أكواب ماء)`;
+        document.getElementById('daily-calories').innerText = calories;
 
-        document.getElementById('results-box').style.display = 'block';
+        const svgBox = document.getElementById('front-human-svg');
+        const checkIcon = document.getElementById('check-icon');
+        const statusCard = document.getElementById('status-card');
 
-        // 3. نسبة التعبئة للماء والتغذية
-        let waterPercentage = Math.min(Math.max((waterLiters / 4.5) * 100, 35), 75);
-        document.getElementById('waterStop2').setAttribute('offset', waterPercentage + '%');
-        document.getElementById('foodStop1').setAttribute('offset', waterPercentage + '%');
+        checkIcon.style.display = 'none';
 
-        // 4. تمدد وانكماش المجسم حسب الوزن
-        let scaleX = 0.75 + ((weight / 150) * 0.65);
-        scaleX = Math.min(Math.max(scaleX, 0.70), 1.35);
-
-        let svgElement = document.getElementById('humanSvg');
-        svgElement.style.transform = `scaleX(${scaleX})`;
-
-        // تحديث حالة المجسم
-        let statusText = "";
-        if (weight < 55) {
-            statusText = "المجسم بوضع نحيف رشيق 🏃‍♂️";
-        } else if (weight <= 85) {
-            statusText = "المجسم بوضع متناسق ومتوازن ⚖️";
+        if (bmi < 18.5) {
+            svgBox.style.transform = 'scaleX(0.8) scaleY(0.95)';
+            statusCard.className = 'status-card status-underweight';
+            statusCard.innerHTML = `⚠️ الجسم نحيف: يحتاج لزيادة الوزن والتغذية والماء.`;
+        } else if (bmi >= 18.5 && bmi <= 24.9) {
+            svgBox.style.transform = 'scale(1)';
+            checkIcon.style.display = 'block';
+            statusCard.className = 'status-card status-normal';
+            statusCard.innerHTML = `✓ وزن مناسب وصحي: حافظ على وزنك واستمر بنفس النمط.`;
         } else {
-            statusText = "المجسم ممتلئ مع زيادة الوزن والاحتياج ⚡";
+            svgBox.style.transform = 'scaleX(1.3) scaleY(1.05)';
+            statusCard.className = 'status-card status-obese';
+            statusCard.innerHTML = `🚨 سمين جداً وممتلئ: ينصح بقطع المشروبات الغازية والوجبات السريعة وممارسة الرياضة.`;
         }
-        document.getElementById('body-status-text').innerText = statusText;
     }
 
-    // تشغيل أوتوماتيكي
-    calculateNeeds();
+    window.onload = updateBodyModel;
 </script>
-
 </body>
 </html>
